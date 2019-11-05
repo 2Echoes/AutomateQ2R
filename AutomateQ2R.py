@@ -9,8 +9,7 @@ class SpinGrid():
         self.__height = height
         self.__width = width
         self.__temperature = ini_temp
-        self.__spinNumber = height*width
-        self.__spingen = self.spin_generator()
+        self.__spinNumber = 0
 
 
     @property
@@ -45,11 +44,9 @@ class SpinGrid():
     def print(self):
         print("height = ",self.height," width = ",self.width,"\nSpin number = ",self.spinNumber,"\ntemperature = ",self.temperature)
 
-    def spin_generator(self):
-        Spingrid = np.zeros(self.height,self.width)
-        for line in range(1,self.height+1):
-            for col in range(1,self.width+1):
-                Spingrid[line,col] = Spin(line,col,grid=self)
+    # def spin_generator(self):
+        # while self.spinNumber != self.height*self.width:
+                   
     
     
 class Spin():
@@ -57,7 +54,7 @@ class Spin():
     def __init__(self,coord,grid):
         self.__value = np.random.choice([-1,1])
         self.__coordinates = coord
-        self.__grid = grid
+        self.__Sgrid = grid
 
     @property
     def value(self):
@@ -73,12 +70,22 @@ class Spin():
     def coordinates(self,coord):
         if (type(coord) == tuple or type(coord) == list or type(coord) == np.ndarray) and len(coord) == 2:
             self.__coordinates = coord
+    
+    @property
+    def Sgrid(self):
+        return self.__grid
+    @Sgrid.setter
+    def grid(self,grid):
+        self.__grid = grid
 
     def print(self):
         print('coordinates = ',self.coordinates,'   Spin = ',self.__value)
     
     def neighboorsum(self):
-        sum = 
+        line = self.coordinates[0]
+        col = self.coordinates[1]
 
 
 if __name__ == '__main__':    
+    grille = SpinGrid(2,2,100)
+    grille.print()
